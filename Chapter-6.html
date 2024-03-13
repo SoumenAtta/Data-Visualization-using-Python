@@ -1,0 +1,829 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://soumenatta.github.io/Data-Visualization-using-Python/Chapter-6.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.2.11">
+    
+    
+      
+        <title>Chapter 6 Seaborn for Statistical Data Visualization - Data Visualization using Python by Dr. Soumen Atta, Ph.D.</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.8c5ef100.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-seaborn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-header__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 6 Seaborn for Statistical Data Visualization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-nav__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-1.html" class="md-nav__link">
+        Chapter 1 Introduction to Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-2.html" class="md-nav__link">
+        Chapter 2 Python for Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-3.html" class="md-nav__link">
+        Chapter 3 Data Preparation and Exploration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-4.html" class="md-nav__link">
+        Chapter 4 Matplotlib Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-5.html" class="md-nav__link">
+        Chapter 5 Advanced Matplotlib
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 6 Seaborn for Statistical Data Visualization
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Chapter-6.html" class="md-nav__link md-nav__link--active">
+        Chapter 6 Seaborn for Statistical Data Visualization
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-seaborn" class="md-nav__link">
+    Introduction to Seaborn
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scatter-plots-and-regression-plots" class="md-nav__link">
+    Scatter Plots and Regression Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Scatter Plots and Regression Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-scatter-plot" class="md-nav__link">
+    Basic Scatter Plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regression-plots" class="md-nav__link">
+    Regression Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-scatter-and-regression-plots" class="md-nav__link">
+    Customizing Scatter and Regression Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#categorical-data-visualization" class="md-nav__link">
+    Categorical Data Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Categorical Data Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bar-plots" class="md-nav__link">
+    Bar Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#box-plots-and-violin-plots" class="md-nav__link">
+    Box Plots and Violin Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-categorical-plots" class="md-nav__link">
+    Customizing Categorical Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-palettes-and-styling-in-seaborn" class="md-nav__link">
+    Color Palettes and Styling in Seaborn
+  </a>
+  
+    <nav class="md-nav" aria-label="Color Palettes and Styling in Seaborn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-color-palettes" class="md-nav__link">
+    Built-in Color Palettes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-color-palettes" class="md-nav__link">
+    Custom Color Palettes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styling-with-seaborn" class="md-nav__link">
+    Styling with Seaborn
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-7.html" class="md-nav__link">
+        Chapter 7 Interactive Data Visualization with Plotly
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-8.html" class="md-nav__link">
+        Chapter 8 Data Visualization for Machine Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-9.html" class="md-nav__link">
+        Chapter 9 Data Visualization in Web Applications
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-10.html" class="md-nav__link">
+        Chapter 10 Advanced Data Visualization Techniques
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-seaborn" class="md-nav__link">
+    Introduction to Seaborn
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scatter-plots-and-regression-plots" class="md-nav__link">
+    Scatter Plots and Regression Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Scatter Plots and Regression Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-scatter-plot" class="md-nav__link">
+    Basic Scatter Plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regression-plots" class="md-nav__link">
+    Regression Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-scatter-and-regression-plots" class="md-nav__link">
+    Customizing Scatter and Regression Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#categorical-data-visualization" class="md-nav__link">
+    Categorical Data Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Categorical Data Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bar-plots" class="md-nav__link">
+    Bar Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#box-plots-and-violin-plots" class="md-nav__link">
+    Box Plots and Violin Plots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-categorical-plots" class="md-nav__link">
+    Customizing Categorical Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-palettes-and-styling-in-seaborn" class="md-nav__link">
+    Color Palettes and Styling in Seaborn
+  </a>
+  
+    <nav class="md-nav" aria-label="Color Palettes and Styling in Seaborn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-color-palettes" class="md-nav__link">
+    Built-in Color Palettes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-color-palettes" class="md-nav__link">
+    Custom Color Palettes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styling-with-seaborn" class="md-nav__link">
+    Styling with Seaborn
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Chapter 6 Seaborn for Statistical Data Visualization</h1>
+
+<p><strong>Chapter 6: Seaborn for Statistical Data Visualization</strong></p>
+<p>While Matplotlib provides a powerful low-level interface for creating a wide range of visualizations, working with statistical data and exploring relationships between variables can often require more advanced techniques and specialized plot types. This is where the Seaborn library comes into play. Built on top of Matplotlib, Seaborn offers a high-level interface for creating informative and visually appealing statistical graphics.</p>
+<p>In this chapter, we'll explore the capabilities of Seaborn and learn how to create various types of plots tailored for statistical data visualization, including scatter plots, regression plots, and categorical data visualizations.</p>
+<h3 id="introduction-to-seaborn">Introduction to Seaborn</h3>
+<p>Seaborn is a Python data visualization library based on Matplotlib, designed to make it easier to create informative and attractive statistical graphics. It was developed by Michael Waskom and is part of the broader PyData ecosystem, which includes other popular libraries like Pandas, NumPy, and Scikit-learn.</p>
+<p>Some key features of Seaborn include:</p>
+<ol>
+<li>
+<p><strong>High-level interface</strong>: Seaborn provides a more intuitive and user-friendly interface compared to the low-level Matplotlib API, making it easier to create complex visualizations with fewer lines of code.</p>
+</li>
+<li>
+<p><strong>Specialized plot types</strong>: Seaborn includes specialized plot types tailored for statistical data analysis, such as scatter plots with regression lines, distribution plots, categorical data visualizations, and more.</p>
+</li>
+<li>
+<p><strong>Attractive default styles</strong>: Seaborn comes with attractive and well-designed default styles and color palettes, ensuring that your visualizations look professional and visually appealing right out of the box.</p>
+</li>
+<li>
+<p><strong>Integration with Pandas</strong>: Seaborn works seamlessly with Pandas DataFrames, making it easy to visualize and explore data stored in this popular tabular data structure.</p>
+</li>
+<li>
+<p><strong>Advanced customization options</strong>: While Seaborn offers a high-level interface, it still provides numerous options for customizing and fine-tuning your visualizations, allowing you to create plots that meet your specific needs.</p>
+</li>
+</ol>
+<p>To get started with Seaborn, you'll need to import the library along with the required data manipulation libraries, such as Pandas and NumPy.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</code></pre></div>
+<h3 id="scatter-plots-and-regression-plots">Scatter Plots and Regression Plots</h3>
+<p>Scatter plots are a fundamental visualization technique for exploring the relationship between two numerical variables. Seaborn builds upon Matplotlib's scatter plot functionality and provides additional features, such as automatically adding regression lines, confidence intervals, and more.</p>
+<h4 id="basic-scatter-plot">Basic Scatter Plot</h4>
+<p>To create a basic scatter plot in Seaborn, you can use the <code>scatterplot()</code> function, which accepts data in the form of a Pandas DataFrame or individual arrays for the x and y variables.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Load example dataset</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a scatter plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we load the "tips" dataset provided by Seaborn and create a scatter plot using <code>sns.scatterplot(x="total_bill", y="tip", data=tips)</code>. Seaborn automatically infers the data types and selects an appropriate color scheme and style for the plot.</p>
+<h4 id="regression-plots">Regression Plots</h4>
+<p>Seaborn also provides specialized functions for adding regression lines and confidence intervals to scatter plots, making it easier to visualize and analyze linear relationships between variables.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a scatter plot with a regression line</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we use the <code>regplot()</code> function to create a scatter plot with a linear regression line fitted to the data. By default, Seaborn also adds a 95% confidence interval around the regression line, providing additional information about the uncertainty of the fitted model.</p>
+<h4 id="customizing-scatter-and-regression-plots">Customizing Scatter and Regression Plots</h4>
+<p>Like Matplotlib, Seaborn provides various options for customizing the appearance and behavior of your plots. This includes setting color palettes, adjusting marker styles, adding annotations, and more.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customize scatter plot appearance</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+                <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span>
+                <span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Table Size&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we customize the scatter plot by mapping the "size" column to both the color (<code>hue</code>) and marker style (<code>style</code>). We also set custom marker styles (<code>markers=["o", "x"]</code>) and use the "viridis" color palette. Additionally, we add a legend with a custom title and position using <code>plt.legend()</code>.</p>
+<h3 id="categorical-data-visualization">Categorical Data Visualization</h3>
+<p>One of the strengths of Seaborn is its ability to visualize and explore relationships between categorical variables and numerical variables. Seaborn provides specialized plot types for this purpose, such as bar plots, box plots, violin plots, and more.</p>
+<h4 id="bar-plots">Bar Plots</h4>
+<p>Bar plots are a common way to visualize the distribution or central tendency of a numerical variable across different categories. Seaborn's <code>barplot()</code> function makes it easy to create bar plots from categorical data.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a bar plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we create a bar plot using <code>sns.barplot(x="day", y="total_bill", data=tips)</code>, where the x-axis represents the different days of the week, and the y-axis shows the average total bill amount. We also rotate the x-axis tick labels using <code>plt.xticks(rotation=45)</code> to improve readability.</p>
+<h4 id="box-plots-and-violin-plots">Box Plots and Violin Plots</h4>
+<p>Box plots and violin plots are useful for visualizing the distribution of a numerical variable across different categories. Box plots show the median, quartiles, and outliers, while violin plots display a kernel density estimate of the distribution, providing a more detailed representation.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a box plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Create a violin plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In these examples, we create a box plot using <code>sns.boxplot(x="day", y="total_bill", data=tips)</code> and a violin plot using <code>sns.violinplot(x="day", y="total_bill", data=tips)</code>. Both plots allow us to compare the distribution of total bill amounts across different days of the week.</p>
+<h4 id="customizing-categorical-plots">Customizing Categorical Plots</h4>
+<p>Like scatter plots, Seaborn provides various options for customizing the appearance and behavior of categorical plots, such as setting color palettes, adjusting plot orders, and adding annotations or labels.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customize bar plot appearance</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Thur&quot;</span><span class="p">,</span> <span class="s2">&quot;Fri&quot;</span><span class="p">,</span> <span class="s2">&quot;Sat&quot;</span><span class="p">,</span> <span class="s2">&quot;Sun&quot;</span><span class="p">],</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Day of Week&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average Total Bill&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Total Bill by Day&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we customize the bar plot by specifying the order of the categories (<code>order=["Thur", "Fri", "Sat", "Sun"]</code>), using the "Blues" color palette, and adding axis labels and a title.</p>
+<h3 id="color-palettes-and-styling-in-seaborn">Color Palettes and Styling in Seaborn</h3>
+<p>One of the strengths of Seaborn is its attractive default styles and color palettes, which help ensure that your visualizations look professional and visually appealing right out of the box. However, Seaborn also provides various options for customizing and fine-tuning the color palettes and styles used in your plots.</p>
+<h4 id="built-in-color-palettes">Built-in Color Palettes</h4>
+<p>Seaborn comes with several built-in color palettes that you can use in your visualizations. These palettes are designed to be colorblind-friendly and visually appealing.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use a built-in color palette</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we use the <code>"rocket"</code> color palette in a scatter plot by passing <code>palette="rocket"</code> to the <code>scatterplot()</code> function.</p>
+<h4 id="custom-color-palettes">Custom Color Palettes</h4>
+<p>In addition to the built-in color palettes, Seaborn also allows you to specify custom color palettes using a list of colors or by importing color palettes from other libraries, such as Matplotlib.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define a custom color palette</span>
+<span class="n">custom_palette</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#FF6347&quot;</span><span class="p">,</span> <span class="s2">&quot;#9370DB&quot;</span><span class="p">,</span> <span class="s2">&quot;#3CB371&quot;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">custom_palette</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we define a custom color palette as a list of hex color codes (<code>custom_palette = ["#FF6347", "#9370DB", "#3CB371"]</code>) and use it in a bar plot by passing <code>palette=custom_palette</code> to the <code>barplot()</code> function.</p>
+<h4 id="styling-with-seaborn">Styling with Seaborn</h4>
+<p>Seaborn provides a high-level interface for controlling the overall styling of your visualizations, including setting color palettes, font styles, grid styles, and more. This can be done using the <code>set()</code> function or by creating a custom style context.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Set global styling with Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Create a custom style context</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In the first example, we set a global "darkgrid" style using <code>sns.set_style("darkgrid")</code>. In the second example, we create a custom style context using <code>with sns.axes_style("whitegrid"):</code> and apply it to a box plot.</p>
+<p>By leveraging the capabilities of Seaborn for statistical data visualization, you'll be able to create informative and visually appealing plots that effectively communicate the relationships and patterns within your data. In the next chapter, we'll explore the Plotly library, which allows you to create interactive and web-based visualizations, opening up new possibilities for exploring and communicating your data.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Chapter-5.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter 5 Advanced Matplotlib" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Chapter 5 Advanced Matplotlib
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Chapter-7.html" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter 7 Interactive Data Visualization with Plotly" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Chapter 7 Interactive Data Visualization with Plotly
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.748e2769.min.js"></script>
+      
+    
+  </body>
+</html>

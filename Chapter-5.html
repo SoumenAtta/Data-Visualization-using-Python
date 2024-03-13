@@ -1,0 +1,872 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://soumenatta.github.io/Data-Visualization-using-Python/Chapter-5.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.2.11">
+    
+    
+      
+        <title>Chapter 5 Advanced Matplotlib - Data Visualization using Python by Dr. Soumen Atta, Ph.D.</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.8c5ef100.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#subplots-and-multi-panel-figures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-header__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 5 Advanced Matplotlib
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-nav__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-1.html" class="md-nav__link">
+        Chapter 1 Introduction to Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-2.html" class="md-nav__link">
+        Chapter 2 Python for Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-3.html" class="md-nav__link">
+        Chapter 3 Data Preparation and Exploration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-4.html" class="md-nav__link">
+        Chapter 4 Matplotlib Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 5 Advanced Matplotlib
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Chapter-5.html" class="md-nav__link md-nav__link--active">
+        Chapter 5 Advanced Matplotlib
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#subplots-and-multi-panel-figures" class="md-nav__link">
+    Subplots and Multi-Panel Figures
+  </a>
+  
+    <nav class="md-nav" aria-label="Subplots and Multi-Panel Figures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-subplots" class="md-nav__link">
+    Creating Subplots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharing-axes-and-customizing-subplots" class="md-nav__link">
+    Sharing Axes and Customizing Subplots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#histograms-and-density-plots" class="md-nav__link">
+    Histograms and Density Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Histograms and Density Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#histograms" class="md-nav__link">
+    Histograms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#density-plots" class="md-nav__link">
+    Density Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pie-charts-and-donut-charts" class="md-nav__link">
+    Pie Charts and Donut Charts
+  </a>
+  
+    <nav class="md-nav" aria-label="Pie Charts and Donut Charts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pie-charts" class="md-nav__link">
+    Pie Charts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donut-charts" class="md-nav__link">
+    Donut Charts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-plot-styles-and-themes" class="md-nav__link">
+    Customizing Plot Styles and Themes
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing Plot Styles and Themes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-styles" class="md-nav__link">
+    Built-in Styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-sheets" class="md-nav__link">
+    Style Sheets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-custom-styles" class="md-nav__link">
+    Defining Custom Styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-6.html" class="md-nav__link">
+        Chapter 6 Seaborn for Statistical Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-7.html" class="md-nav__link">
+        Chapter 7 Interactive Data Visualization with Plotly
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-8.html" class="md-nav__link">
+        Chapter 8 Data Visualization for Machine Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-9.html" class="md-nav__link">
+        Chapter 9 Data Visualization in Web Applications
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-10.html" class="md-nav__link">
+        Chapter 10 Advanced Data Visualization Techniques
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#subplots-and-multi-panel-figures" class="md-nav__link">
+    Subplots and Multi-Panel Figures
+  </a>
+  
+    <nav class="md-nav" aria-label="Subplots and Multi-Panel Figures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-subplots" class="md-nav__link">
+    Creating Subplots
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharing-axes-and-customizing-subplots" class="md-nav__link">
+    Sharing Axes and Customizing Subplots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#histograms-and-density-plots" class="md-nav__link">
+    Histograms and Density Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Histograms and Density Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#histograms" class="md-nav__link">
+    Histograms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#density-plots" class="md-nav__link">
+    Density Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pie-charts-and-donut-charts" class="md-nav__link">
+    Pie Charts and Donut Charts
+  </a>
+  
+    <nav class="md-nav" aria-label="Pie Charts and Donut Charts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pie-charts" class="md-nav__link">
+    Pie Charts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donut-charts" class="md-nav__link">
+    Donut Charts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-plot-styles-and-themes" class="md-nav__link">
+    Customizing Plot Styles and Themes
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing Plot Styles and Themes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-styles" class="md-nav__link">
+    Built-in Styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-sheets" class="md-nav__link">
+    Style Sheets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-custom-styles" class="md-nav__link">
+    Defining Custom Styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Chapter 5 Advanced Matplotlib</h1>
+
+<p><strong>Chapter 5: Advanced Matplotlib</strong></p>
+<p>In the previous chapter, we covered the basics of creating simple plots using Matplotlib and customizing their appearance. While Matplotlib provides a powerful low-level interface for creating visualizations, it also offers advanced features and techniques for creating more complex and specialized plots. In this chapter, we'll explore some of these advanced techniques, including subplots, histograms, pie charts, and customizing plot styles and themes.</p>
+<h3 id="subplots-and-multi-panel-figures">Subplots and Multi-Panel Figures</h3>
+<p>Subplots are a powerful feature in Matplotlib that allows you to create multi-panel figures, where multiple plots are arranged in a grid-like layout. This is particularly useful when you need to visualize and compare different aspects of your data or when you want to create small multiples of the same plot type with different data or parameters.</p>
+<h4 id="creating-subplots">Creating Subplots</h4>
+<p>To create subplots in Matplotlib, you can use the <code>plt.subplots()</code> function, which returns a figure object and an array of axes objects representing the individual subplot panels.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a 2x2 grid of subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot data on each subplot</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Adjust spacing between subplots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Add a global title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Multi-Panel Figure Example&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we create a 2x2 grid of subplots using <code>plt.subplots(2, 2)</code>. The <code>axs</code> object returned is a 2D array, where each element represents one of the subplot axes. We can then plot data on each subplot by indexing into this array (<code>axs[row, col]</code>) and using the corresponding axes object.</p>
+<p>Additionally, we adjust the spacing between subplots using <code>plt.subplots_adjust()</code> and add a global title to the figure using <code>fig.suptitle()</code>.</p>
+<h4 id="sharing-axes-and-customizing-subplots">Sharing Axes and Customizing Subplots</h4>
+<p>Matplotlib provides several options for customizing the appearance and behavior of subplots, including sharing axes between subplots, adjusting tick locations and labels, and applying different styles or colormaps to each subplot.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Share x-axis between subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Apply different colormaps to each subplot</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+<span class="c1"># Customize tick labels and limits</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we share the x-axis between two vertically stacked subplots using <code>sharex=True</code>. We also apply different colormaps to each subplot using the <code>cmap</code> parameter in <code>imshow()</code>. Finally, we customize the tick labels and axis limits for each subplot individually.</p>
+<h3 id="histograms-and-density-plots">Histograms and Density Plots</h3>
+<p>Histograms and density plots are essential tools for visualizing the distribution of a numerical variable. Matplotlib provides functions for creating both types of plots, as well as options for customizing their appearance and behavior.</p>
+<h4 id="histograms">Histograms</h4>
+<p>Histograms are bar charts that represent the frequency or count of data points falling within specified bin ranges. In Matplotlib, you can create a histogram using the <code>plt.hist()</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Example data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create a histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram Example&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we create a histogram using <code>plt.hist()</code>, specifying the data and the number of bins (<code>bins=5</code>). We also customize the appearance of the histogram by setting the edge color of the bars to black (<code>edgecolor='black'</code>).</p>
+<h4 id="density-plots">Density Plots</h4>
+<p>Density plots, also known as kernel density estimates (KDE), provide a smooth representation of the underlying probability density function of a numerical variable. In Matplotlib, you can create a density plot using the <code>plt.hist()</code> function with the <code>density</code> parameter set to <code>True</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Example data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Create a density plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Density Plot Example&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we create a density plot using <code>plt.hist(data, bins=20, density=True)</code>. By setting <code>density=True</code>, Matplotlib normalizes the histogram such that the area under the curve integrates to 1, representing a probability density function.</p>
+<h3 id="pie-charts-and-donut-charts">Pie Charts and Donut Charts</h3>
+<p>Pie charts and donut charts are commonly used for visualizing the proportions or percentages of different categories within a whole. While these chart types have some limitations (e.g., difficulty in comparing slice sizes, inability to show precise values), they can be useful in certain situations, such as when presenting high-level summaries or overviews.</p>
+<h4 id="pie-charts">Pie Charts</h4>
+<p>To create a pie chart in Matplotlib, you can use the <code>plt.pie()</code> function, which takes a list of values or proportions as input, as well as optional labels and other customization parameters.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Example data</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="c1"># Create a pie chart</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>  <span class="c1"># Ensure circular shape</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pie Chart Example&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we create a pie chart using <code>plt.pie(values, labels=labels)</code>. The <code>autopct</code> parameter is used to display the percentage values on each slice, and <code>plt.axis('equal')</code> ensures that the pie chart maintains a circular shape.</p>
+<h4 id="donut-charts">Donut Charts</h4>
+<p>Donut charts are similar to pie charts but have a hole in the center, which can be useful for displaying additional information or creating a multi-level breakdown of categories. In Matplotlib, you can create a donut chart by combining a pie chart with a circle patch for the center hole.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Example data</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="c1"># Create a donut chart</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">centre_circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">centre_circle</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Donut Chart Example&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, we create a donut chart by first creating a pie chart with <code>ax.pie(values, labels=labels, radius=1)</code>. We then add a white circle patch to the center using <code>plt.Circle((0, 0), 0.7, fc='white')</code> and <code>ax.add_artist(centre_circle)</code>. Finally, we ensure the circular shape using <code>ax.axis('equal')</code>.</p>
+<h3 id="customizing-plot-styles-and-themes">Customizing Plot Styles and Themes</h3>
+<p>While Matplotlib provides default styles for its plots, you may want to customize the overall appearance of your visualizations to match a specific style guide, branding, or personal preference. Matplotlib offers several ways to customize plot styles and themes, including built-in styles, style sheets, and the ability to define your own custom styles.</p>
+<h4 id="built-in-styles">Built-in Styles</h4>
+<p>Matplotlib includes a set of built-in styles that you can apply to your plots using the <code>plt.style.use()</code> function. These styles define various aspects of the plot appearance, such as color schemes, line styles, font sizes, and more.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Use a built-in style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;dark_background&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a plot</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot with Dark Background Style&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we apply the <code>'dark_background'</code> style to our plot using <code>plt.style.use('dark_background')</code>. This changes the overall appearance of the plot, including the background color, text color, and color scheme for the plot elements.</p>
+<h4 id="style-sheets">Style Sheets</h4>
+<p>Matplotlib also supports the use of style sheets, which are external files that define custom styles for your plots. These style sheets can be created and shared across projects, allowing for consistent visualization styles within an organization or team.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Load a custom style sheet</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;path/to/custom_style.mplstyle&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a plot with the custom style</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<p>In this example, we load a custom style sheet using <code>plt.style.use('path/to/custom_style.mplstyle')</code>. The style sheet file (<code>custom_style.mplstyle</code>) should be a text file containing key-value pairs that define various plot properties and styles.</p>
+<h4 id="defining-custom-styles">Defining Custom Styles</h4>
+<p>In addition to using built-in styles or style sheets, Matplotlib also allows you to define custom styles programmatically using a context manager or a dictionary of style properties.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define a custom style using a context manager</span>
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">({</span><span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="s1">&#39;lines.linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}):</span>
+    <span class="c1"># Create a plot with the custom style</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot with Custom Style&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define a custom style using a dictionary</span>
+<span class="n">custom_style</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;axes.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;#eeeeee&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;figure.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;text.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;grid.color&#39;</span><span class="p">:</span> <span class="s1">&#39;lightgray&#39;</span>
+<span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">custom_style</span><span class="p">)</span>
+
+<span class="c1"># Create a plot with the custom style</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<p>In this example, we define a custom style using a context manager (<code>with plt.style.context(...):</code>) and a dictionary of style properties (<code>custom_style = { ... }</code>). Within the context manager or after applying the style dictionary using <code>plt.style.use(custom_style)</code>, any plots created will follow the specified custom styles.</p>
+<p>By mastering the advanced techniques of Matplotlib, you'll be able to create highly customized and visually appealing visualizations that effectively communicate your data and insights. In the next chapter, we'll explore the Seaborn library, which builds upon Matplotlib and provides a higher-level interface for creating informative and attractive statistical graphics.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Chapter-4.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter 4 Matplotlib Basics" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Chapter 4 Matplotlib Basics
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Chapter-6.html" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter 6 Seaborn for Statistical Data Visualization" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Chapter 6 Seaborn for Statistical Data Visualization
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.748e2769.min.js"></script>
+      
+    
+  </body>
+</html>

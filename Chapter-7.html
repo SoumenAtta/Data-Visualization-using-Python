@@ -1,0 +1,800 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://soumenatta.github.io/Data-Visualization-using-Python/Chapter-7.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.2.11">
+    
+    
+      
+        <title>Chapter 7 Interactive Data Visualization with Plotly - Data Visualization using Python by Dr. Soumen Atta, Ph.D.</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.8c5ef100.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-plotly" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-header__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 7 Interactive Data Visualization with Plotly
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Data Visualization using Python by Dr. Soumen Atta, Ph.D." class="md-nav__button md-logo" aria-label="Data Visualization using Python by Dr. Soumen Atta, Ph.D." data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Data Visualization using Python by Dr. Soumen Atta, Ph.D.
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-1.html" class="md-nav__link">
+        Chapter 1 Introduction to Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-2.html" class="md-nav__link">
+        Chapter 2 Python for Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-3.html" class="md-nav__link">
+        Chapter 3 Data Preparation and Exploration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-4.html" class="md-nav__link">
+        Chapter 4 Matplotlib Basics
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-5.html" class="md-nav__link">
+        Chapter 5 Advanced Matplotlib
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-6.html" class="md-nav__link">
+        Chapter 6 Seaborn for Statistical Data Visualization
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 7 Interactive Data Visualization with Plotly
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Chapter-7.html" class="md-nav__link md-nav__link--active">
+        Chapter 7 Interactive Data Visualization with Plotly
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-plotly" class="md-nav__link">
+    Introduction to Plotly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-scatter-plots" class="md-nav__link">
+    Interactive Scatter Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Interactive Scatter Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-scatter-plot" class="md-nav__link">
+    Basic Scatter Plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-scatter-plots" class="md-nav__link">
+    Customizing Scatter Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#line-charts-and-time-series-visualization" class="md-nav__link">
+    Line Charts and Time-Series Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Line Charts and Time-Series Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-line-chart" class="md-nav__link">
+    Basic Line Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-line-charts" class="md-nav__link">
+    Customizing Line Charts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choropleth-maps-and-geographic-visualization" class="md-nav__link">
+    Choropleth Maps and Geographic Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Choropleth Maps and Geographic Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-choropleth-map" class="md-nav__link">
+    Basic Choropleth Map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-choropleth-maps" class="md-nav__link">
+    Customizing Choropleth Maps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-8.html" class="md-nav__link">
+        Chapter 8 Data Visualization for Machine Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-9.html" class="md-nav__link">
+        Chapter 9 Data Visualization in Web Applications
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Chapter-10.html" class="md-nav__link">
+        Chapter 10 Advanced Data Visualization Techniques
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-plotly" class="md-nav__link">
+    Introduction to Plotly
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-scatter-plots" class="md-nav__link">
+    Interactive Scatter Plots
+  </a>
+  
+    <nav class="md-nav" aria-label="Interactive Scatter Plots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-scatter-plot" class="md-nav__link">
+    Basic Scatter Plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-scatter-plots" class="md-nav__link">
+    Customizing Scatter Plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#line-charts-and-time-series-visualization" class="md-nav__link">
+    Line Charts and Time-Series Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Line Charts and Time-Series Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-line-chart" class="md-nav__link">
+    Basic Line Chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-line-charts" class="md-nav__link">
+    Customizing Line Charts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choropleth-maps-and-geographic-visualization" class="md-nav__link">
+    Choropleth Maps and Geographic Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Choropleth Maps and Geographic Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-choropleth-map" class="md-nav__link">
+    Basic Choropleth Map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-choropleth-maps" class="md-nav__link">
+    Customizing Choropleth Maps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Chapter 7 Interactive Data Visualization with Plotly</h1>
+
+<p><strong>Chapter 7: Interactive Data Visualization with Plotly</strong></p>
+<p>In the previous chapters, we explored Matplotlib and Seaborn, which are powerful libraries for creating static data visualizations. However, in today's world of web-based applications and interactive dashboards, there is an increasing demand for visualizations that allow users to interact with the data, zoom in and out, hover over data points to reveal additional information, and more.</p>
+<p>Enter Plotly, a high-level library that enables you to create interactive, web-based visualizations in Python. Plotly leverages modern web technologies, such as HTML5, CSS, and JavaScript, to render stunning, interactive plots that can be easily embedded in web applications, dashboards, or shared online.</p>
+<p>In this chapter, we'll explore the capabilities of Plotly and learn how to create various types of interactive plots, including scatter plots, line charts, bar charts, and even interactive maps and 3D visualizations.</p>
+<h3 id="introduction-to-plotly">Introduction to Plotly</h3>
+<p>Plotly is a data visualization library that allows you to create interactive, web-based visualizations directly from Python. It was initially developed by a company called Plotly but has since become an open-source project with a vibrant community of contributors.</p>
+<p>Some key features of Plotly include:</p>
+<ol>
+<li>
+<p><strong>Interactive Visualizations</strong>: Plotly's visualizations are interactive by default, allowing users to zoom, pan, hover over data points to reveal additional information, and more.</p>
+</li>
+<li>
+<p><strong>Web-Based Rendering</strong>: Plotly leverages modern web technologies like HTML5, CSS, and JavaScript to render visualizations in web browsers, making it easy to embed plots in web applications or share them online.</p>
+</li>
+<li>
+<p><strong>Wide Range of Chart Types</strong>: Plotly supports a wide variety of chart types, including scatter plots, line charts, bar charts, histograms, pie charts, maps, 3D visualizations, and more.</p>
+</li>
+<li>
+<p><strong>Integration with Python Data Analysis Libraries</strong>: Plotly integrates seamlessly with popular Python data analysis libraries like Pandas and NumPy, making it easy to visualize and explore data stored in these formats.</p>
+</li>
+<li>
+<p><strong>Customizable and Extensible</strong>: Plotly provides extensive customization options, allowing you to fine-tune the appearance and behavior of your visualizations. Additionally, Plotly is highly extensible, with a robust API and the ability to create custom chart types and layouts.</p>
+</li>
+</ol>
+<p>To get started with Plotly, you'll need to install the <code>plotly</code> library and import the necessary modules.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+</code></pre></div>
+<p>The <code>plotly.graph_objs</code> module provides low-level access to Plotly's graphing objects, while <code>plotly.express</code> offers a higher-level interface for creating common chart types with minimal code.</p>
+<h3 id="interactive-scatter-plots">Interactive Scatter Plots</h3>
+<p>Scatter plots are one of the most fundamental and widely used visualization techniques for exploring relationships between two or more numerical variables. Plotly's interactive scatter plots take this classic visualization to the next level by allowing users to zoom, pan, and hover over data points to reveal additional information.</p>
+<h4 id="basic-scatter-plot">Basic Scatter Plot</h4>
+<p>To create a basic scatter plot in Plotly, you can use the <code>plotly.express.scatter()</code> function, which provides a high-level interface for creating scatter plots with minimal code.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="c1"># Load example dataset</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">tips</span><span class="p">()</span>
+
+<span class="c1"># Create a scatter plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we load the "tips" dataset provided by Plotly and create a scatter plot using <code>px.scatter(tips, x="total_bill", y="tip")</code>. Plotly automatically infers the data types and creates an interactive scatter plot with sensible default settings.</p>
+<h4 id="customizing-scatter-plots">Customizing Scatter Plots</h4>
+<p>While Plotly's default settings produce visually appealing plots, you'll often want to customize the appearance and behavior of your visualizations to better suit your needs or to highlight specific aspects of your data.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customize scatter plot appearance</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span>
+                 <span class="n">hover_data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">],</span>
+                 <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Tips by Total Bill&quot;</span><span class="p">)</span>
+
+<span class="c1"># Update layout</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Total Bill&quot;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Tip Amount&quot;</span><span class="p">,</span>
+    <span class="n">font_family</span><span class="o">=</span><span class="s2">&quot;Arial&quot;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we customize the scatter plot by mapping the "sex" column to the color of the data points, and the "size" column to the size of the markers. We also specify additional columns ("day" and "time") to display when hovering over data points using the <code>hover_data</code> parameter.</p>
+<p>Additionally, we update the layout of the plot by setting custom axis titles and specifying a font family using the <code>fig.update_layout()</code> function.</p>
+<h3 id="line-charts-and-time-series-visualization">Line Charts and Time-Series Visualization</h3>
+<p>Line charts are commonly used for visualizing trends and patterns over time, making them particularly useful for analyzing time-series data. Plotly provides interactive line charts that allow users to zoom in and out, hover over data points to reveal specific values, and even add annotations and shapes to highlight important events or patterns.</p>
+<h4 id="basic-line-chart">Basic Line Chart</h4>
+<p>To create a basic line chart in Plotly, you can use the <code>plotly.express.line()</code> function, which provides a high-level interface for creating line charts with minimal code.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load example dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;stock_data.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create a line chart</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Close&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we load a CSV file containing stock price data, parse the "Date" column as the index, and create a line chart using <code>px.line(df, x=df.index, y="Close")</code>. Plotly automatically recognizes the date index and creates an interactive line chart with sensible default settings.</p>
+<h4 id="customizing-line-charts">Customizing Line Charts</h4>
+<p>Like scatter plots, Plotly provides various options for customizing the appearance and behavior of line charts, including adding multiple lines, customizing axis scales, and adding annotations and shapes.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customize line chart appearance</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">],</span>
+              <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Stock Price Data&quot;</span><span class="p">,</span>
+              <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Price (USD)&quot;</span><span class="p">})</span>
+
+<span class="c1"># Add annotations and shapes</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_vrect</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="s2">&quot;2020-03-01&quot;</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="s2">&quot;2020-04-30&quot;</span><span class="p">,</span>
+              <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&quot;COVID-19 Pandemic&quot;</span><span class="p">,</span>
+              <span class="n">annotation_position</span><span class="o">=</span><span class="s2">&quot;top left&quot;</span><span class="p">,</span>
+              <span class="n">fillcolor</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+              <span class="n">line_width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we create a line chart with multiple lines representing the "Close", "High", and "Low" stock prices. We also customize the plot title and axis label using the <code>title</code> and <code>labels</code> parameters.</p>
+<p>Additionally, we add a vertical rectangle (<code>add_vrect</code>) to highlight a specific time period (March-April 2020) and annotate it with the text "COVID-19 Pandemic". The rectangle is filled with a semi-transparent green color and has no border line.</p>
+<h3 id="choropleth-maps-and-geographic-visualization">Choropleth Maps and Geographic Visualization</h3>
+<p>Plotly's capabilities extend beyond traditional charts and plots, allowing you to create interactive maps and visualize geographic data. One powerful feature of Plotly is its support for choropleth maps, which use color to represent data values across geographic regions.</p>
+<h4 id="basic-choropleth-map">Basic Choropleth Map</h4>
+<p>To create a basic choropleth map in Plotly, you can use the <code>plotly.express.choropleth()</code> function, which provides a high-level interface for creating choropleth maps with minimal code.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="c1"># Load example dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">gapminder</span><span class="p">()</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;year == 2007&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a choropleth map</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">locations</span><span class="o">=</span><span class="s2">&quot;iso_alpha&quot;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lifeExp&quot;</span><span class="p">,</span>
+                    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+                    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;Plasma&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we load the "gapminder" dataset provided by Plotly and filter it to include data from the year 2007. We then create a choropleth map using <code>px.choropleth(data, locations="iso_alpha", color="lifeExp", hover_name="country")</code>, where the <code>locations</code> parameter specifies the geographic identifiers (in this case, ISO alpha-3 codes), the <code>color</code> parameter represents the data values to be mapped to color (life expectancy), and the <code>hover_name</code> parameter specifies the column to display when hovering over a country.</p>
+<p>Additionally, we set the <code>color_continuous_scale</code> parameter to use the "Plasma" color scale, which creates a visually appealing gradient for representing the data values.</p>
+<h4 id="customizing-choropleth-maps">Customizing Choropleth Maps</h4>
+<p>Like other Plotly visualizations, choropleth maps can be customized in various ways, including adjusting color scales, adding annotations, and updating the layout and appearance of the map.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customize choropleth map appearance</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">locations</span><span class="o">=</span><span class="s2">&quot;iso_alpha&quot;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lifeExp&quot;</span><span class="p">,</span>
+                    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">,</span>
+                    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+                    <span class="n">range_color</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+                    <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">,</span>
+                    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Life Expectancy in 2007&quot;</span><span class="p">)</span>
+
+<span class="c1"># Update layout</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">geo</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">showframe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">showcoastlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">projection_type</span><span class="o">=</span><span class="s2">&quot;equirectangular&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>In this example, we customize the choropleth map by setting the <code>color_continuous_scale</code> to "Viridis", adjusting the range of the color scale using <code>range_color</code>, specifying the geographic scope as the entire world (<code>scope="world"</code>), and setting a custom title.</p>
+<p>Additionally, we update the layout of the map by removing the map frame and coastlines, and setting the map projection to "equirectangular" using the <code>fig.update_layout()</code> function.</p>
+<p>By leveraging Plotly's interactive and web-based visualizations, you can create engaging and immersive experiences for exploring and communicating your data. In the next chapter, we'll explore how to integrate Plotly visualizations into web applications and discuss best practices for deploying and sharing your interactive visualizations.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Chapter-6.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter 6 Seaborn for Statistical Data Visualization" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Chapter 6 Seaborn for Statistical Data Visualization
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Chapter-8.html" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter 8 Data Visualization for Machine Learning" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Chapter 8 Data Visualization for Machine Learning
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.748e2769.min.js"></script>
+      
+    
+  </body>
+</html>
